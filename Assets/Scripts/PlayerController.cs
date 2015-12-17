@@ -6,8 +6,13 @@ public class PlayerController : MonoBehaviour {
 
 	//speed of ball movement
 	public float speed = 2;
-	//amount of pick ups collected
+	//actual amount of pick ups that needs to be collected to win
+	public int pickUpAmount = 3;
+
+
+	//amount of pick ups collected displayed for the player
 	public Text countText;
+
 	//message that is displayed when the player wins
 	public Text winText;
 
@@ -49,7 +54,7 @@ public class PlayerController : MonoBehaviour {
 	{
 		countText.text = "Count: " + count.ToString ();
 
-		if (count >= 12)
+		if (count >= pickUpAmount)
 		{
 			winText.text = "You Win!";
 		}
