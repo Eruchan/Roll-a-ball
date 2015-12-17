@@ -155,6 +155,12 @@ ModelImporter:
     400144: Spine1
     400146: Spine2
     400148: Waist
+    2300000: Bulbasaur
+    2300002: Bulbasaur_LVine
+    2300004: Bulbasaur_RVine
+    3300000: Bulbasaur
+    3300002: Bulbasaur_LVine
+    3300004: Bulbasaur_RVine
     4300000: Bulbasaur
     4300002: Bulbasaur_LVine
     4300004: Bulbasaur_RVine
@@ -188,9 +194,9 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
-    importBlendShapes: 1
+    importBlendShapes: 0
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
@@ -219,7 +225,7 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   additionalBone: 0
   userData: 
   assetBundleName: 

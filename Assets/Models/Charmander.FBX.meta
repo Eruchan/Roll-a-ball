@@ -153,6 +153,8 @@ ModelImporter:
     400142: TailA02
     400144: TailA03
     400146: Waist
+    2300000: Charmander
+    3300000: Charmander
     4300000: Charmander
     9500000: //RootNode
     13700000: Charmander
@@ -182,9 +184,9 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
-    importBlendShapes: 1
+    importBlendShapes: 0
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
@@ -213,7 +215,7 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   additionalBone: 0
   userData: 
   assetBundleName: 
