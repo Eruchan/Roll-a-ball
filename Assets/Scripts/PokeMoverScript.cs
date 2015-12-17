@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 using System.Collections;
 
 public class PokeMoverScript : MonoBehaviour {
@@ -6,7 +7,9 @@ public class PokeMoverScript : MonoBehaviour {
 	public enum MoveModi
 	{
 		Directional,
-		RandomInArea,
+		RandomInCircle,
+		MoveInCicles,
+		Patrol,
 	}
 
 	public MoveModi MoveMode;
@@ -21,6 +24,21 @@ public class PokeMoverScript : MonoBehaviour {
 	public Vector3 MovementDirection;
 	public float DistanceFromStart;
 	private bool IsMovingTo = true;
+
+	// Variables for random movement in circle
+
+	public float InCircleRadius;
+
+	// Variables for moving in circles
+
+	public float OnCircleRadius;
+	public float OnCircleFragments;
+	private float OnCircleFraction;
+
+	// Variables for patrolling
+
+	public List<GameObject> PatrolPoints;
+	private int CurrentPoint;
 
 	// Use this for initialization
 	void Start () {
@@ -46,8 +64,12 @@ public class PokeMoverScript : MonoBehaviour {
 		{
 		case MoveModi.Directional:
 			return GetNextMovementPointDirectional();
-		case MoveModi.RandomInArea:
+		case MoveModi.RandomInCircle:
 			return GetNextMovementPointRandomInArea();
+		case MoveModi.MoveInCicles:
+			return GetNextMovementPointOnCircle();
+		case MoveModi.Patrol:
+			return GetNextMovementPointPatrol();
 		default:
 			return Vector3.zero;
 		}
@@ -73,6 +95,53 @@ public class PokeMoverScript : MonoBehaviour {
 
 	Vector3 GetNextMovementPointRandomInArea()
 	{
-		return Vector3.zero;
+		Vector3 PointToMoveTo = new Vector3();
+
+		Vector2 RandomPointInCircle;
+		RandomPointInCircle = (Random.insideUnitCircle * InCircleRadius);
+
+		PointToMoveTo.x = RandomPointInCircle.x;
+		PointToMoveTo.z = RandomPointInCircle.y;
+
+		PointToMoveTo += StartingPosition;
+
+		return PointToMoveTo;
+	}
+
+	Vector3 GetNextMovementPointOnCircle()
+	{
+		Vector3 PointToMoveTo = new Vector3();
+
+		Vector2 PointOnCircle = new Vector2();
+		PointOnCircle.x = Mathf.Sin(OnCircleFraction * Mathf.PI * 2) * OnCircleRadius;
+		PointOnCircle.y = Mathf.Cos(OnCircleFraction * Mathf.PI * 2) * OnCircleRadius - OnCircleRadius;
+
+		OnCircleFraction += 1 / OnCircleFragments;
+
+		PointToMoveTo.x = PointOnCircle.x;
+		PointToMoveTo.z = PointOnCircle.y;
+
+		PointToMoveTo += StartingPosition;
+
+		return PointToMoveTo;
+	}
+
+	Vector3 GetNextMovementPointPatrol()
+	{
+		Vector3 PointToMoveTo = new Vector3();
+
+		PointToMoveTo = PatrolPoints[CurrentPoint].transform.position;
+
+		if(CurrentPoint < PatrolPoints.Count - 1)
+		{
+			CurrentPoint++;
+		}
+		else
+		{
+			CurrentPoint = 0;
+		}
+
+		return PointToMoveTo;
+
 	}
 }
