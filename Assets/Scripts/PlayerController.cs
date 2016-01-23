@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour {
 	//actual amount of pick ups that needs to be collected to win
 	public int pickUpAmount = 3;
 
+	// Pivot of the camera, used to define the direction of the applied force
+	public Transform CameraPivot;
 
 	//amount of pick ups collected displayed for the player
 	public Text countText;
@@ -36,6 +38,9 @@ public class PlayerController : MonoBehaviour {
 		float moveVertical = Input.GetAxis ("Vertical");
 		
 		Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
+
+		// As we can only rotate the camera horizontally we can use the rotation of the pivot directly
+		movement = CameraPivot.rotation * movement;
 		
 		rb.AddForce (movement * speed);
 	}
